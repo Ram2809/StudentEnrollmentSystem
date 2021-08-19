@@ -20,6 +20,7 @@ import com.enrollment.service.HodServiceImpl;
 
 @RestController
 @RequestMapping("/hod")
+//
 public class HodController {
 	@Autowired
 	private HodServiceImpl hodServiceImpl;
