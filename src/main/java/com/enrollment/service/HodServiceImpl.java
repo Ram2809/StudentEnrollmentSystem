@@ -5,9 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.enrollment.entity.HodEntity;
+import com.enrollment.exception.HodIdNotFoundException;
 import com.enrollment.repository.HodRepository;
 @Service
 @Transactional
@@ -28,6 +32,15 @@ public class HodServiceImpl implements HodService{
 	public HodEntity getParticularHodDetails(Integer id) {
 		// TODO Auto-generated method stub
 		return hodRepository.findById(id).get();
+	}
+	@Override
+	public ResponseEntity<String> deleteHodDetails(Integer id) throws HodIdNotFoundException {
+		// TODO Auto-generated method stub
+		return hodRepository.findById(id)
+				.map(hod->{
+				hodRepository.delete(hod);
+				return new ResponseEntity<String>("HOD Details deleted successfully!",new HttpHeaders(),HttpStatus.OK);
+				}).orElseThrow(()->new HodIdNotFoundException("HOD not found with the ID"+" "+id));
 	}
 
 }
