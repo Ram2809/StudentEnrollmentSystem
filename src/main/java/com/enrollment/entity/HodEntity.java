@@ -1,14 +1,26 @@
 package com.enrollment.entity;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Id;
 
 @Entity
 @Table(name = "HODPersonal")
+//@Getter
+//@Setter
+//@ToString
+//@NoArgsConstructor
 public class HodEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +40,7 @@ public class HodEntity {
 	@Column(nullable = false)
 	private Long contactNo;
 	@Column(nullable = false)
-	private String Address;
+	private String address;
 	@Column(nullable = false)
 	private Integer deptId;
 
@@ -37,9 +49,9 @@ public class HodEntity {
 	}
 
 	public HodEntity(Integer id, String firstName, String lastName, String dateOfBirth, String gender,
-			String qualification, String email, Long contactNo, String address, Integer deptId) {
+			String qualification, String email, Long contactNo, String address, Integer deptId) {// byte[] image) {
 		super();
-		id = this.id;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
@@ -47,7 +59,7 @@ public class HodEntity {
 		this.qualification = qualification;
 		this.email = email;
 		this.contactNo = contactNo;
-		Address = address;
+		this.address = address;
 		this.deptId = deptId;
 	}
 
@@ -116,11 +128,11 @@ public class HodEntity {
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		address = address;
 	}
 
 	public Integer getDeptId() {
@@ -133,9 +145,9 @@ public class HodEntity {
 
 	@Override
 	public String toString() {
-		return "HodEntity [Id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+		return "HodEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", gender=" + gender + ", qualification=" + qualification + ", email=" + email
-				+ ", contactNo=" + contactNo + ", Address=" + Address + ", deptId=" + deptId + "]";
+				+ ", contactNo=" + contactNo + ", Address=" + address + ", deptId=" + deptId;
 	}
 
 }
