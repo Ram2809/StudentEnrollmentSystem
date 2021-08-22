@@ -12,4 +12,5 @@ public interface HodService {
 	List<HodEntity> getHodDetails();
 	HodEntity getParticularHodDetails(Integer id);
 	ResponseEntity<String> deleteHodDetails(Integer id) throws HodIdNotFoundException;
+	ResponseEntity<String> updateHodDetails(Integer id,HodEntity hodEntity) throws HodIdNotFoundException;
 }

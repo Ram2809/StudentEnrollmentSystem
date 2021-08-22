@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enrollment.entity.HodEntity;
 import com.enrollment.exception.HodIdNotFoundException;
-import com.enrollment.service.HodService;
 import com.enrollment.service.HodServiceImpl;
 
 @RestController
@@ -65,9 +64,9 @@ public class HodController {
 		return hodServiceImpl.deleteHodDetails(id);
 	}
 	@PutMapping("/hodUpdation/{id}")
-	public ResponseEntity<String> updateHodDetails(@PathVariable("id") int id,@RequestBody HodEntity hodEntity)
+	public ResponseEntity<String> updateHodDetails(@PathVariable("id") int id,@RequestBody HodEntity hodEntity) throws HodIdNotFoundException
 	{
-		return hodServiceImpl.updateHodDetails()
+		return hodServiceImpl.updateHodDetails(id,hodEntity);
 	}
 	@ExceptionHandler(HodIdNotFoundException.class)
 	public ResponseEntity<String> userNotFound(HodIdNotFoundException e)

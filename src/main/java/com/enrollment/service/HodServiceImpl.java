@@ -13,45 +13,51 @@ import org.springframework.stereotype.Service;
 import com.enrollment.entity.HodEntity;
 import com.enrollment.exception.HodIdNotFoundException;
 import com.enrollment.repository.HodRepository;
+
 @Service
 @Transactional
-public class HodServiceImpl implements HodService{
+public class HodServiceImpl implements HodService {
 	@Autowired
 	private HodRepository hodRepository;
+
 	@Override
 	public HodEntity addHodDetails(HodEntity hodEntity) {
-		// TODO Auto-generated method stub
 		return hodRepository.save(hodEntity);
 	}
+
 	@Override
 	public List<HodEntity> getHodDetails() {
-		// TODO Auto-generated method stub
 		return hodRepository.findAll();
 	}
+
 	@Override
 	public HodEntity getParticularHodDetails(Integer id) {
-		// TODO Auto-generated method stub
 		return hodRepository.findById(id).get();
 	}
+
 	@Override
 	public ResponseEntity<String> deleteHodDetails(Integer id) throws HodIdNotFoundException {
-		// TODO Auto-generated method stub
-		return hodRepository.findById(id)
-				.map(hod->{
-				hodRepository.delete(hod);
-				return new ResponseEntity<String>("HOD Details deleted successfully!",new HttpHeaders(),HttpStatus.OK);
-				}).orElseThrow(()->new HodIdNotFoundException("HOD not found with the ID"+" "+id));
+		return hodRepository.findById(id).map(hod -> {
+			hodRepository.delete(hod);
+			return new ResponseEntity<String>("HOD Details deleted successfully!", new HttpHeaders(), HttpStatus.OK);
+		}).orElseThrow(() -> new HodIdNotFoundException("HOD not found with the ID" + " " + id));
 	}
-	
-}
 
-/*@PutMapping("/students/{id}")
-public Student updateStudent(@PathVariable Long id,
-                                @RequestBody Student studentUpdated) {
-    return studentRepository.findById(id)
-            .map(student -> {
-                student.setName(studentUpdated.getName());
-                student.setAge(studentUpdated.getAge());
-                return studentRepository.save(student);
-            }).orElseThrow(() -> new NotFoundException("Student not found with id " + id));
-}*/
+	@Override
+	public ResponseEntity<String> updateHodDetails(Integer id, HodEntity hodEntity) throws HodIdNotFoundException {
+		return hodRepository.findById(id).map(hod -> {
+			hod.setFirstName(hodEntity.getFirstName());
+			hod.setLastName(hodEntity.getLastName());
+			hod.setDateOfBirth(hodEntity.getDateOfBirth());
+			hod.setGender(hodEntity.getGender());
+			hod.setQualification(hodEntity.getQualification());
+			hod.setEmail(hodEntity.getEmail());
+			hod.setContactNo(hodEntity.getContactNo());
+			hod.setAddress(hodEntity.getAddress());
+			hod.setDeptId(hodEntity.getDeptId());
+			hodRepository.save(hod);
+			return new ResponseEntity<String>("HOD Details updated successfully!", new HttpHeaders(), HttpStatus.OK);
+		}).orElseThrow(() -> new HodIdNotFoundException("HOD not found with the ID" + " " + id));
+	}
+
+}

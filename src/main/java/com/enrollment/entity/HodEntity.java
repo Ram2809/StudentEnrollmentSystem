@@ -2,8 +2,10 @@ package com.enrollment.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -14,6 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "HODPersonal")
@@ -43,13 +46,14 @@ public class HodEntity {
 	private String address;
 	@Column(nullable = false)
 	private Integer deptId;
-
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="hodPersonal")
+	private HodLoginEntity hodLoginCredentials;
 	public HodEntity() {
 		super();
 	}
 
 	public HodEntity(Integer id, String firstName, String lastName, String dateOfBirth, String gender,
-			String qualification, String email, Long contactNo, String address, Integer deptId) {// byte[] image) {
+			String qualification, String email, Long contactNo, String address, Integer deptId) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -132,7 +136,7 @@ public class HodEntity {
 	}
 
 	public void setAddress(String address) {
-		address = address;
+		this.address = address;
 	}
 
 	public Integer getDeptId() {
@@ -143,11 +147,20 @@ public class HodEntity {
 		this.deptId = deptId;
 	}
 
+	public HodLoginEntity getHodLoginCredentials() {
+		return hodLoginCredentials;
+	}
+
+	public void setHodLoginCredentials(HodLoginEntity hodLoginCredentials) {
+		this.hodLoginCredentials = hodLoginCredentials;
+	}
+
 	@Override
 	public String toString() {
 		return "HodEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", gender=" + gender + ", qualification=" + qualification + ", email=" + email
-				+ ", contactNo=" + contactNo + ", Address=" + address + ", deptId=" + deptId;
+				+ ", contactNo=" + contactNo + ", address=" + address + ", deptId=" + deptId + "]";
 	}
+	
 
 }
