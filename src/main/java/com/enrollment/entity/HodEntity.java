@@ -26,8 +26,8 @@ import javax.persistence.OneToOne;
 //@NoArgsConstructor
 public class HodEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Column(nullable = false)
 	private String firstName;
 	@Column(nullable = false)
@@ -52,7 +52,7 @@ public class HodEntity {
 		super();
 	}
 
-	public HodEntity(Integer id, String firstName, String lastName, String dateOfBirth, String gender,
+	public HodEntity(Long id, String firstName, String lastName, String dateOfBirth, String gender,
 			String qualification, String email, Long contactNo, String address, Integer deptId) {
 		super();
 		this.id = id;
@@ -67,11 +67,11 @@ public class HodEntity {
 		this.deptId = deptId;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

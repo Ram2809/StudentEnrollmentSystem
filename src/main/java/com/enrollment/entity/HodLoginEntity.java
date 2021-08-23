@@ -15,22 +15,65 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-@Getter
+/*@Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString*/
 @Entity
 @Table(name="HODLogin")
 public class HodLoginEntity {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long loginId;
 	@NotNull
-	private Integer userId;
+	private Long userId;//id of hod
 	@NotNull
 	@Size(max=50)
 	private String password;
 	@OneToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="hodId",nullable=false)
 	private HodEntity hodPersonal;
+	
+	
+	public HodLoginEntity() {
+		super();
+	}
+	public HodLoginEntity(Long loginId, @NotNull Long userId, @NotNull @Size(max = 50) String password,
+			HodEntity hodPersonal) {
+		super();
+		this.loginId = loginId;
+		this.userId = userId;
+		this.password = password;
+		this.hodPersonal = hodPersonal;
+	}
+	public Long getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(Long loginId) {
+		this.loginId = loginId;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public HodEntity getHodPersonal() {
+		return hodPersonal;
+	}
+	public void setHodPersonal(HodEntity hodPersonal) {
+		this.hodPersonal = hodPersonal;
+	}
+	@Override
+	public String toString() {
+		return "HodLoginEntity [loginId=" + loginId + ", userId=" + userId + ", password=" + password + "]";
+	}
+	
+	
 }

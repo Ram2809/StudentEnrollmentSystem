@@ -46,7 +46,7 @@ public class HodController {
 		return new ResponseEntity<List<HodEntity>>(hodDetailsList,new HttpHeaders(),HttpStatus.OK);
 	}
 	@GetMapping("/getParticularHodDetails/{id}")
-	public ResponseEntity<HodEntity> getParticularHodDetails(@PathVariable("id")int id) throws HodIdNotFoundException
+	public ResponseEntity<HodEntity> getParticularHodDetails(@PathVariable("id")Long id) throws HodIdNotFoundException
 	{
 		HodEntity particularHodDetails=hodServiceImpl.getParticularHodDetails(id);
 		if(particularHodDetails==null)
@@ -59,12 +59,12 @@ public class HodController {
 		}
 	}
 	@DeleteMapping("/hodDeletion/{id}")
-	public ResponseEntity<String> deleteHodDetails(@PathVariable("id") int id) throws HodIdNotFoundException
+	public ResponseEntity<String> deleteHodDetails(@PathVariable("id") Long id) throws HodIdNotFoundException
 	{
 		return hodServiceImpl.deleteHodDetails(id);
 	}
 	@PutMapping("/hodUpdation/{id}")
-	public ResponseEntity<String> updateHodDetails(@PathVariable("id") int id,@RequestBody HodEntity hodEntity) throws HodIdNotFoundException
+	public ResponseEntity<String> updateHodDetails(@PathVariable("id") Long id,@RequestBody HodEntity hodEntity) throws HodIdNotFoundException
 	{
 		return hodServiceImpl.updateHodDetails(id,hodEntity);
 	}

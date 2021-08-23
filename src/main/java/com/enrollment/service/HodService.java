@@ -10,7 +10,7 @@ import com.enrollment.exception.HodIdNotFoundException;
 public interface HodService {
 	HodEntity addHodDetails(HodEntity hodEntity);
 	List<HodEntity> getHodDetails();
-	HodEntity getParticularHodDetails(Integer id);
-	ResponseEntity<String> deleteHodDetails(Integer id) throws HodIdNotFoundException;
-	ResponseEntity<String> updateHodDetails(Integer id,HodEntity hodEntity) throws HodIdNotFoundException;
+	HodEntity getParticularHodDetails(Long id);
+	ResponseEntity<String> deleteHodDetails(Long id) throws HodIdNotFoundException;
+	ResponseEntity<String> updateHodDetails(Long id,HodEntity hodEntity) throws HodIdNotFoundException;
 }

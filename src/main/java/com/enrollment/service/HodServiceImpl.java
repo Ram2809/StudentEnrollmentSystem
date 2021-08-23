@@ -31,12 +31,12 @@ public class HodServiceImpl implements HodService {
 	}
 
 	@Override
-	public HodEntity getParticularHodDetails(Integer id) {
+	public HodEntity getParticularHodDetails(Long id) {
 		return hodRepository.findById(id).get();
 	}
 
 	@Override
-	public ResponseEntity<String> deleteHodDetails(Integer id) throws HodIdNotFoundException {
+	public ResponseEntity<String> deleteHodDetails(Long id) throws HodIdNotFoundException {
 		return hodRepository.findById(id).map(hod -> {
 			hodRepository.delete(hod);
 			return new ResponseEntity<String>("HOD Details deleted successfully!", new HttpHeaders(), HttpStatus.OK);
@@ -44,7 +44,7 @@ public class HodServiceImpl implements HodService {
 	}
 
 	@Override
-	public ResponseEntity<String> updateHodDetails(Integer id, HodEntity hodEntity) throws HodIdNotFoundException {
+	public ResponseEntity<String> updateHodDetails(Long id, HodEntity hodEntity) throws HodIdNotFoundException {
 		return hodRepository.findById(id).map(hod -> {
 			hod.setFirstName(hodEntity.getFirstName());
 			hod.setLastName(hodEntity.getLastName());
