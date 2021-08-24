@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.enrollment.entity.HodEntity;
+import com.enrollment.exception.DepartmentNotFoundException;
 import com.enrollment.exception.HodIdNotFoundException;
 
 public interface HodService {
-	HodEntity addHodDetails(HodEntity hodEntity);
+	ResponseEntity<String> addHodDetails(Long deptId,HodEntity hodEntity) throws DepartmentNotFoundException;
 	List<HodEntity> getHodDetails();
 	HodEntity getParticularHodDetails(Long id);
 	ResponseEntity<String> deleteHodDetails(Long id) throws HodIdNotFoundException;

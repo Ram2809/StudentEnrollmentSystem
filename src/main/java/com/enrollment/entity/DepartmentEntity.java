@@ -1,5 +1,6 @@
 package com.enrollment.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,10 +22,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-//@ToString
+@ToString
 @Entity
 @Table(name="Department")
-public class DepartmentEntity {
+public class DepartmentEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long deptId;
@@ -32,14 +34,14 @@ public class DepartmentEntity {
 	private String deptName;
 	@OneToMany(mappedBy="department",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<CourseEntity> course;
+	@OneToMany(mappedBy="department",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private Set<TimeTableEntity> timetable;
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="department")
+	private HodEntity hodLogin;
 	public DepartmentEntity(Long deptId, @NotNull @Size(max = 50) String deptName) {
 		super();
 		this.deptId = deptId;
 		this.deptName = deptName;
-	}
-	@Override
-	public String toString() {
-		return "DepartmentEntity [deptId=" + deptId + ", deptName=" + deptName + "]";
 	}
 	
 }

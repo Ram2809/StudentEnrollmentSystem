@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enrollment.entity.HodEntity;
+import com.enrollment.exception.DepartmentNotFoundException;
 import com.enrollment.exception.HodIdNotFoundException;
 import com.enrollment.service.HodServiceImpl;
 
@@ -26,18 +27,10 @@ import com.enrollment.service.HodServiceImpl;
 public class HodController {
 	@Autowired
 	private HodServiceImpl hodServiceImpl;
-	@PostMapping("/hodInsertion")
-	public ResponseEntity<String> addHodDetails(@RequestBody HodEntity hodEntity) throws HodIdNotFoundException
+	@PostMapping("/department/{deptId}/hodInsertion")
+	public ResponseEntity<String> addHodDetails(@PathVariable("deptId") Long deptId,@RequestBody HodEntity hodEntity) throws HodIdNotFoundException, DepartmentNotFoundException
 	{
-		HodEntity hodDetails=hodServiceImpl.addHodDetails(hodEntity);
-		if(hodDetails==null)
-		{
-			throw new HodIdNotFoundException("HOD Details not found, Please Enter the details!");
-		}
-		else
-		{
-			 return new ResponseEntity<String>("HOD Details added successfully", new HttpHeaders(), HttpStatus.OK);
-		}
+		return hodServiceImpl.addHodDetails(deptId,hodEntity);
 	}
 	@GetMapping("/getHodDetails")
 	public ResponseEntity<List<HodEntity>> getHodDetails()
