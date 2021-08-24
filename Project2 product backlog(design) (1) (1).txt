@@ -1,0 +1,167 @@
+===================================Student Enrollment System===================================
+
+
+Home page
+HOD sec   Student sec    Staff sec
+
+
+Hod and Staff have same login(login button,signup button,forgotpassword button,captcha(optional));
+student have different login page(login button,signup button,forgotpassword button,captcha(optional));
+------------------------
+Student
+   Proceed to enrollment
+   View Timetable
+   View courses along with staff
+   View profile
+   Update profile
+   Reset password
+   Logout
+   add image of student(optional)
+   View Attendance(optional)
+   Examination fee(optional)
+----------------------------
+Staff
+   Add attendance(optional)
+   View timetable
+   Get enrolled student list
+   View profile
+   Update profile
+   Reset password
+   Logout
+   add image of student(optional)
+------------------------------
+HOD
+   Adding Course for semester
+   Assign staff for courses
+   Add timetable details
+   View staff details
+   View Student details
+   Add Teacher
+   Add Student
+-----------------------------
+
+Table Design:
+--------------
+StudentAssign(HOD adds){
+    assignId(pk auto);
+    rollNo(pk);
+    name;
+    joiningDate;
+    deptId(fk)(default);
+    deptName(default);
+}
+----------
+StudentPersonal(Sign up form){
+    rollNo(fk);
+    firstName[text];
+    lastName[text];
+    gender [radio];
+    dob [date];
+    email[email];
+    contactNo[tel pattern];
+    address[textarea];
+    *image(blob);
+}
+-------------
+StaffAssign(HOD adds){
+    assignId(pk);
+    id(pk);
+    name;
+    joiningDate;
+    deptId(fk)(default);
+    deptName(default);
+}
+-------------
+StaffPersonal(Sign up form){
+    id(fk);
+    firstName[text];
+    lastName[text];
+    gender [radio];
+    dob [date]; 
+    qualification;
+    email[email];
+    contactNo[tel pattern];
+    address[textarea];
+    *image(blob); 
+}
+----------------
+HOD(Sign up form){
+    id(pk auto);
+    deptId(fk);
+    firstName[text];
+    lastName[text];
+    gender [radio];
+    dob [date];
+    qualification;
+    email[email];
+    contactNo[tel pattern];
+    address[textarea];
+    *image(blob);
+}
+----------------
+Department{
+   deptId(pk);
+   deptName;
+}
+----------------
+Course{
+    semester id(fk);
+    deptId(fk);
+    courseCode(pk);
+    name;
+}
+------------------
+LoginCredentials{
+   loginId(pk auto);
+   userName(rollNo(fk));
+   password;
+}
+--------------------
+Timetable{
+   deptId(fk);
+   semester id(fk);
+   day;
+   period1;
+   period2;
+   period3;
+   period4;
+   period5;
+   period6;
+   period7;
+   period8;
+}
+--------------------
+Semester{
+semesterId(pk)
+startdate(
+enddate
+}
+---------------------
+Enrollment{
+   rollNo(fk);
+   courseCode(fk);
+   teacherId(fk);
+}
+--------------------------
+StaffCourseAssign{
+   teacherId(fk);
+   courseCode(fk);
+}
+--------------------------
+
+Mapping of tables
+
+StudentAssign-->StudentPersonal(one-one)
+StudentPersonal-->LoginCredentials(one-one)
+StudentAssign-->department(one-one)
+StaffAssign-->StaffPersonal(one-one)
+StaffPersonal-->LoginCredentials(one-one)
+StaffAssign-->department(one-one)
+HODPersonal-->LoginCredentials(one-one)
+Department-->Course(many-many)
+Department--->HodPersonal(One-One)
+Semester---->Course(many-many)
+Timetable->department(many-many)
+timetable->semester(one-to-one)
+
+
