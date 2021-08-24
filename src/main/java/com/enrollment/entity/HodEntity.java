@@ -1,5 +1,6 @@
 package com.enrollment.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import javax.persistence.OneToOne;
 //@Setter
 //@ToString
 //@NoArgsConstructor
-public class HodEntity {
+public class HodEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

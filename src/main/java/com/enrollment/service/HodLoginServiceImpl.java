@@ -1,7 +1,5 @@
 package com.enrollment.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -44,6 +42,16 @@ public class HodLoginServiceImpl implements HodLoginService{
 					hodLoginRepository.save(loginDetails);
 					return new ResponseEntity<String>("HOD Login Details updated successfully!", new HttpHeaders(), HttpStatus.OK);
 				}).orElseThrow(()->new LoginIdNotFoundException("Login Id Not Found!"));
+	}
+	@Override
+	public ResponseEntity<HodLoginEntity> getHodLoginDetails(Long hodId) throws HodIdNotFoundException {
+		// TODO Auto-generated method stub
+		if(!hodRepository.existsById(hodId))
+		{
+			throw new HodIdNotFoundException("Hod ID Not Found!");
+		}
+		HodLoginEntity hodLoginDetails=hodLoginRepository.getByHodId(hodId);
+		return new ResponseEntity<HodLoginEntity>(hodLoginDetails,new HttpHeaders(),HttpStatus.OK);
 	}
 	
 }

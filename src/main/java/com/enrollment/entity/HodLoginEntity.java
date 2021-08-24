@@ -1,5 +1,7 @@
 package com.enrollment.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,17 +13,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 /*@Getter
 @Setter
-@NoArgsConstructor
-@ToString*/
+@NoArgsConstructor*/
+@ToString
 @Entity
 @Table(name="HODLogin")
-public class HodLoginEntity {
+public class HodLoginEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long loginId;
@@ -32,6 +36,7 @@ public class HodLoginEntity {
 	private String password;
 	@OneToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="hodId",nullable=false)
+	@JsonIgnore
 	private HodEntity hodPersonal;
 	
 	
@@ -72,8 +77,7 @@ public class HodLoginEntity {
 	}
 	@Override
 	public String toString() {
-		return "HodLoginEntity [loginId=" + loginId + ", userId=" + userId + ", password=" + password + "]";
+		return "HodLoginEntity [loginId=" + loginId + ", userId=" + userId + ", password=" + password + ", hodPersonal="
+				+ hodPersonal + "]";
 	}
-	
-	
 }

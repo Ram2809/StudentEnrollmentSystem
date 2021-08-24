@@ -11,4 +11,5 @@ import com.enrollment.exception.LoginIdNotFoundException;
 public interface HodLoginService {
 	ResponseEntity<String> addHodLoginDetails(Long id,HodLoginEntity hodLoginDetails) throws HodIdNotFoundException;
 	ResponseEntity<String> updateHodLoginDetails(Long hodId,Long loginId,HodLoginEntity hodLoginDetails) throws HodIdNotFoundException, LoginIdNotFoundException;
+	ResponseEntity<HodLoginEntity> getHodLoginDetails(Long hodId) throws HodIdNotFoundException;
 }

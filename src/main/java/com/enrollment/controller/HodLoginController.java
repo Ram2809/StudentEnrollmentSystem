@@ -2,6 +2,7 @@ package com.enrollment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,5 +33,9 @@ public class HodLoginController {
 			throws HodIdNotFoundException, LoginIdNotFoundException {
 		return hodLoginServiceImpl.updateHodLoginDetails(hodId, loginId, hodLoginDetails);
 	}
-
+	@GetMapping("/hodPersonal/{id}/getLoginDetails")
+	public ResponseEntity<HodLoginEntity> getHodLoginDetails(@PathVariable("id") Long hodId) throws HodIdNotFoundException
+	{
+		return hodLoginServiceImpl.getHodLoginDetails(hodId);
+	}
 }
