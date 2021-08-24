@@ -1,5 +1,7 @@
 package com.enrollment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,8 @@ import com.enrollment.entity.CourseEntity;
 import com.enrollment.entity.DepartmentEntity;
 import com.enrollment.entity.SemesterEntity;
 import com.enrollment.exception.CourseCodeNotFoundException;
+import com.enrollment.exception.DepartmentNotFoundException;
+import com.enrollment.exception.SemesterNotFoundException;
 import com.enrollment.repository.CourseRepository;
 import com.enrollment.repository.DepartmentRepository;
 import com.enrollment.repository.SemesterRepository;
@@ -43,7 +47,7 @@ public class CourseServiceImpl implements CourseService{
 		return new ResponseEntity<String>("Course Details Added Successfully!",new HttpHeaders(),HttpStatus.OK);
 	}
 	@Override
-	public ResponseEntity<String> updateCourseDetails(Long semId,Long deptId,String courseCode, CourseEntity courseDetails) throws CourseCodeNotFoundException {
+	public ResponseEntity<String> updateCourseDetails(String courseCode, CourseEntity courseDetails) throws CourseCodeNotFoundException {
 		// TODO Auto-generated method stub
 		return courseRepository.findById(courseCode)
 				.map(course->{
@@ -51,6 +55,35 @@ public class CourseServiceImpl implements CourseService{
 					courseRepository.save(course);
 					return new ResponseEntity<String>("Course Details Updated Successfully!",new HttpHeaders(),HttpStatus.OK);
 				}).orElseThrow(()->new CourseCodeNotFoundException("Course code not found!"));
+	}
+	@Override
+	public ResponseEntity<String> deleteCourseDetails(String courseCode) throws CourseCodeNotFoundException {
+		// TODO Auto-generated method stub
+		return courseRepository.findById(courseCode)
+				.map(course->{
+					courseRepository.delete(course);
+					return new ResponseEntity<String>("Course Details Deleted Successfully!",new HttpHeaders(),HttpStatus.OK);
+				}).orElseThrow(()->new CourseCodeNotFoundException("Course code not found!"));
+	}
+	@Override
+	public List<CourseEntity> getCourseDetailsBySemId(Long semId) throws SemesterNotFoundException {
+		// TODO Auto-generated method stub
+		if(!semesterRepository.existsById(semId))
+		{
+			throw new SemesterNotFoundException("Semester Not Found!,Enter the valid id");
+		}
+		List<CourseEntity> courseDetails=(List<CourseEntity>) courseRepository.getBySemId(semId);
+		return courseDetails;
+	}
+	@Override
+	public List<CourseEntity> getCourseDetailsByDeptId(Long deptId) throws DepartmentNotFoundException {
+		// TODO Auto-generated method stub
+		if(!departmentRepository.existsById(deptId))
+		{
+			throw new DepartmentNotFoundException("Department Not Found!,Enter the valid id");
+		}
+		List<CourseEntity> courseDetails=courseRepository.getByDeptId(deptId);
+		return courseDetails;
 	}
 
 }
