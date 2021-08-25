@@ -38,6 +38,10 @@ public class DepartmentEntity implements Serializable{
 	private Set<TimeTableEntity> timetable;
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="department")
 	private HodEntity hodLogin;
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="department",orphanRemoval=true)
+	private Set<StudentAssignEntity> assignName;
+	@OneToMany(mappedBy="dept",fetch = FetchType.LAZY)
+	private Set<StaffAssignEntity> staffs;
 	public DepartmentEntity(Long deptId, @NotNull @Size(max = 50) String deptName) {
 		super();
 		this.deptId = deptId;

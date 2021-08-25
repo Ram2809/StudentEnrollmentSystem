@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,4 +41,9 @@ public class TimeTableController {
 		List<TimeTableEntity> timeTableDetails=timeTableServiceImpl.getTimeTableDetails(semId,deptId); 
 		return new ResponseEntity<List<TimeTableEntity>>(timeTableDetails,new HttpHeaders(),HttpStatus.OK);
 	}
+//	@PutMapping("/semester/{semId}/department/{deptId}/timetable/{day}/updateTimeTableDetails")
+//	public ResponseEntity<String> updateTimeTableDetails(@PathVariable("semId") Long semId,@PathVariable("deptId") Long deptId,@PathVariable("day") String day,@RequestBody TimeTableEntity timeTableDetails)
+//	{
+//		return timeTableServiceImpl.updateTimeTableDetails(semId,deptId,day,timeTableDetails);
+//	}
 }

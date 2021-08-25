@@ -71,5 +71,19 @@ public class TimeTableServiceImpl implements TimeTableService{
 		List<TimeTableEntity> timeTableDetails=timeTableRepository.getBySemAndDeptId(semId,deptId);
 		return timeTableDetails;
 	}
+//	@Override
+//	public ResponseEntity<String> updateTimeTableDetails(Long semId, Long deptId, String day,TimeTableEntity timeTableDetails)
+//			throws SemesterNotFoundException, DepartmentNotFoundException {
+//		if(!semesterRepository.existsById(semId))
+//		{
+//			throw new SemesterNotFoundException("Semester ID Not Found!");
+//		}
+//		if(!departmentRepository.existsById(deptId))
+//		{
+//			throw new DepartmentNotFoundException("Department ID Not Found!");
+//		}
+//		timeTableRepository.updateBySemIdAndDeptId(semId,deptId,day,timeTableDetails);
+//		return new ResponseEntity<String>("TimeTable Details Updated Successfully!",new HttpHeaders(),HttpStatus.OK);
+//	}
 	
 }

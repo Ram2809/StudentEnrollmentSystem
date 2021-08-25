@@ -19,5 +19,9 @@ public interface TimeTableRepository extends JpaRepository<TimeTableEntity,Long>
 	
 	@Query("FROM TimeTableEntity t WHERE t.semester.id=:semId AND t.department.deptId=:deptId")
 	List<TimeTableEntity> getBySemAndDeptId(@Param("semId") Long semId,@Param("deptId") Long deptId);
+//
+//	@Modifying
+//	@Query("UPDATE TimeTableEntity t SET ")
+//	void updateBySemIdAndDeptId(Long semId, Long deptId, String day,);
 	
 }
