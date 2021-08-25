@@ -1,8 +1,13 @@
 package com.enrollment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +33,11 @@ public class TimeTableController {
 	public ResponseEntity<String> deleteTimeTableDetails(@PathVariable("semId") Long semId,@PathVariable("deptId") Long deptId,@PathVariable("day") String day) throws SemesterNotFoundException, DepartmentNotFoundException
 	{
 		return timeTableServiceImpl.deleteTimeTableDetails(semId,deptId,day);
+	}
+	@GetMapping("/semester/{semId}/department/{deptId}/getTimeTableDetails")
+	public ResponseEntity<List<TimeTableEntity>> getTimeTableDetails(@PathVariable("semId") Long semId,@PathVariable("deptId") Long deptId) throws SemesterNotFoundException, DepartmentNotFoundException
+	{
+		List<TimeTableEntity> timeTableDetails=timeTableServiceImpl.getTimeTableDetails(semId,deptId); 
+		return new ResponseEntity<List<TimeTableEntity>>(timeTableDetails,new HttpHeaders(),HttpStatus.OK);
 	}
 }

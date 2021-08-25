@@ -1,5 +1,7 @@
 package com.enrollment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,6 +55,21 @@ public class TimeTableServiceImpl implements TimeTableService{
 		}
 		timeTableRepository.deleteByIdAndDay(semId,deptId,day);
 		return new ResponseEntity<String>("TimeTable Details deleted Successfully!",new HttpHeaders(),HttpStatus.OK);
+	}
+	@Override
+	public List<TimeTableEntity> getTimeTableDetails(Long semId, Long deptId)
+			throws SemesterNotFoundException, DepartmentNotFoundException {
+		// TODO Auto-generated method stub
+		if(!semesterRepository.existsById(semId))
+		{
+			throw new SemesterNotFoundException("Semester ID Not Found!");
+		}
+		if(!departmentRepository.existsById(deptId))
+		{
+			throw new DepartmentNotFoundException("Department ID Not Found!");
+		}
+		List<TimeTableEntity> timeTableDetails=timeTableRepository.getBySemAndDeptId(semId,deptId);
+		return timeTableDetails;
 	}
 	
 }
