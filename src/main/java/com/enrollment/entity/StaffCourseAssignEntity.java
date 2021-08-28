@@ -1,7 +1,9 @@
 package com.enrollment.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,26 +20,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @NoArgsConstructor
-//@ToString
+@ToString
 @Entity
-@Table(name="Enrollment")
-public class EnrollmentEntity implements Serializable{
+@Table(name="StaffCourseAssign")
+public class StaffCourseAssignEntity implements Serializable{
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="rollNo",nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long autoId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id",nullable=false)
 	@JsonIgnore
-	private StudentAssignEntity student;
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	private StaffAssignEntity staffId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="courseCode",nullable=false)
 	@JsonIgnore
-	private CourseEntity course;
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="staffId",nullable=false)
-	@JsonIgnore
-	private StaffAssignEntity staff;
+	private CourseEntity courseId;
+	
+	
+	
 }

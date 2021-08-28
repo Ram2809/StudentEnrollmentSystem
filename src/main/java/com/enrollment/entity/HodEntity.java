@@ -29,7 +29,7 @@ import javax.persistence.OneToOne;
 @Table(name = "HODPersonal")
 @Getter
 @Setter
-@ToString
+//@ToString
 @NoArgsConstructor
 public class HodEntity implements Serializable {
 	@Id

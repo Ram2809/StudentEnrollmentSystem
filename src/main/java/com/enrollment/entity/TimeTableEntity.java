@@ -22,7 +22,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name="TimeTable")
 public class TimeTableEntity implements Serializable{

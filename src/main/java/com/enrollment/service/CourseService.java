@@ -15,4 +15,6 @@ public interface CourseService {
 	ResponseEntity<String> deleteCourseDetails(String courseCode)throws CourseCodeNotFoundException;
 	List<CourseEntity> getCourseDetailsBySemId(Long semId) throws SemesterNotFoundException;
 	List<CourseEntity> getCourseDetailsByDeptId(Long deptId) throws DepartmentNotFoundException;
+	ResponseEntity<CourseEntity> getCourseDetails(String code) throws CourseCodeNotFoundException;
+	List<CourseEntity> getCourseDetailsBySemIdAndDeptId(Long semId,Long deptId) throws DepartmentNotFoundException, SemesterNotFoundException;
 }

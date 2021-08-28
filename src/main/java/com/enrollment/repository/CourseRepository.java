@@ -12,6 +12,10 @@ import com.enrollment.entity.CourseEntity;
 public interface CourseRepository extends JpaRepository<CourseEntity,String>{
 	@Query("SELECT c FROM CourseEntity c WHERE c.semester.id=:semesterId")
 	List<CourseEntity> getBySemId(@Param("semesterId") Long semId);
+	
 	@Query("FROM CourseEntity c WHERE c.department.deptId=:deptId")
 	List<CourseEntity> getByDeptId(@Param("deptId") Long deptId);
+	
+	@Query("FROM CourseEntity c WHERE c.semester.id=:semId AND c.department.deptId=:deptId")
+	List<CourseEntity> getBySemIdAndDeptId(@Param("semId") Long semId, @Param("deptId") Long deptId);
 }

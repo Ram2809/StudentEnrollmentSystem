@@ -20,7 +20,7 @@ public class EnrollmentController {
 	@Autowired
 	private EnrollmentService enrollmentServiceImpl;
 	@PostMapping("/student/{rollNo}/course/{code}/staff/{staffId}/addEnrollmentDetails")
-	public ResponseEntity<String> addEnrollmentDetails(@PathVariable("rollNo") Long rollNo,@PathVariable("code") String code,@PathVariable("staffId") Long staffId,@RequestBody EnrollmentEntity enrollmentDetails) throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException
+	public String addEnrollmentDetails(@PathVariable("rollNo") Long rollNo,@PathVariable("code") String code,@PathVariable("staffId") Long staffId,@RequestBody EnrollmentEntity enrollmentDetails) //throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException
 	{
 		return enrollmentServiceImpl.addEnrollmentDetails(rollNo,code,staffId,enrollmentDetails);
 	}

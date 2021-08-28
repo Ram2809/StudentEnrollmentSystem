@@ -85,5 +85,30 @@ public class CourseServiceImpl implements CourseService{
 		List<CourseEntity> courseDetails=courseRepository.getByDeptId(deptId);
 		return courseDetails;
 	}
+	@Override
+	public ResponseEntity<CourseEntity> getCourseDetails(String code) throws CourseCodeNotFoundException {
+		// TODO Auto-generated method stub
+		if(!courseRepository.existsById(code))
+		{
+			throw new CourseCodeNotFoundException("Enter the valid course code!");
+		}
+		CourseEntity courseDetails=courseRepository.findById(code).get();
+		return new ResponseEntity<CourseEntity>(courseDetails,new HttpHeaders(),HttpStatus.OK);
+	}
+	@Override
+	public List<CourseEntity> getCourseDetailsBySemIdAndDeptId(Long semId, Long deptId)
+			throws DepartmentNotFoundException,SemesterNotFoundException {
+		// TODO Auto-generated method stub
+		if(!semesterRepository.existsById(semId))
+		{
+			throw new SemesterNotFoundException("Semester Not Found!Enter the valid id");
+		}
+		if(!departmentRepository.existsById(deptId))
+		{
+			throw new DepartmentNotFoundException("Department Not Found!Enter the valid id");
+		}
+		List<CourseEntity> courseDetails=courseRepository.getBySemIdAndDeptId(semId,deptId);
+		return courseDetails;
+	}
 
 }

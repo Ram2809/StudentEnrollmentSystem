@@ -8,5 +8,5 @@ import com.enrollment.exception.RollNoNotFoundException;
 import com.enrollment.exception.StaffIdNotFoundException;
 
 public interface EnrollmentService {
-	ResponseEntity<String> addEnrollmentDetails(Long rollNo,String code,Long staffId,EnrollmentEntity enrollmentDetails) throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException;
+	String addEnrollmentDetails(Long rollNo,String code,Long staffId,EnrollmentEntity enrollmentDetails); //throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException;
 }

@@ -22,7 +22,7 @@ import lombok.ToString;
 /*@Getter
 @Setter
 @NoArgsConstructor*/
-@ToString
+//@ToString
 @Entity
 @Table(name="HODLogin")
 public class HodLoginEntity implements Serializable{

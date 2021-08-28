@@ -41,8 +41,8 @@ public class StaffAssignEntity implements Serializable {
 	private DepartmentEntity dept;
 	
 	
-	//@OneToMany(mappedBy="staffId",fetch = FetchType.LAZY)
-	//private Set<StaffCourseAssignEntity> staffs;
+	@OneToMany(mappedBy="staffId",fetch = FetchType.LAZY)
+	private Set<StaffCourseAssignEntity> staffs;
 	
 	
 	@OneToOne(mappedBy="staffId",cascade = CascadeType.ALL, fetch = FetchType.LAZY)

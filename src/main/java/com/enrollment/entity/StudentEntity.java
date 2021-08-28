@@ -114,12 +114,5 @@ public class StudentEntity implements Serializable {
 		this.address = address;
 		//this.userId = userId;
 	}
-
-	@Override
-	public String toString() {
-		return "StudentEntity [id=" + id + ", studentAssign=" + studentAssign + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", email=" + email
-				+ ", contactNo=" + contactNo + ", address=" + address + "]";
-	}
 	
 }

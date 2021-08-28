@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.enrollment.service.CourseService;
 
 @RestController
 @RequestMapping("/course")
+@CrossOrigin("http://localhost:4200")
 public class CourseController {
 	@Autowired
 	private CourseService courseServiceImpl;
@@ -51,6 +53,17 @@ public class CourseController {
 	public ResponseEntity<List<CourseEntity>> getCourseDetailsByDeptId(@PathVariable("deptId") Long deptId) throws DepartmentNotFoundException
 	{
 		List<CourseEntity> courseDetails=courseServiceImpl.getCourseDetailsByDeptId(deptId);
+		return new ResponseEntity<List<CourseEntity>>(courseDetails,new HttpHeaders(),HttpStatus.OK);
+	}
+	@GetMapping("/getCourseDetails/{code}")
+	public ResponseEntity<CourseEntity> getCourseDetails(@PathVariable("code") String code) throws CourseCodeNotFoundException
+	{
+		return courseServiceImpl.getCourseDetails(code);
+	}
+	@GetMapping("/semester/{semId}/department/{deptId}/getBySemesterIdAndDeptId")
+	public ResponseEntity<List<CourseEntity>> getCourseDetailsBySemIdAndDeptId(@PathVariable("semId") Long semId,@PathVariable Long deptId) throws SemesterNotFoundException,DepartmentNotFoundException
+	{
+		List<CourseEntity> courseDetails=courseServiceImpl.getCourseDetailsBySemIdAndDeptId(semId,deptId);
 		return new ResponseEntity<List<CourseEntity>>(courseDetails,new HttpHeaders(),HttpStatus.OK);
 	}
 }

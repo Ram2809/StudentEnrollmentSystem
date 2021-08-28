@@ -29,8 +29,8 @@ public class EnrollmentServiceImpl implements EnrollmentService{
 	@Autowired
 	private EnrollmentRepository enrollmentRepository;
 	@Override
-	public ResponseEntity<String> addEnrollmentDetails(Long rollNo, String code, Long staffId,
-			EnrollmentEntity enrollmentDetails) throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException {
+	public String addEnrollmentDetails(Long rollNo, String code, Long staffId,
+			EnrollmentEntity enrollmentDetails) { //throws RollNoNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException {
 		// TODO Auto-generated method stub
 		/*if(!studentRepository.existsById(rollNo))
 		{
@@ -54,7 +54,7 @@ public class EnrollmentServiceImpl implements EnrollmentService{
 		System.out.println(courseDetails);
 		enrollmentDetails.setCourse(courseDetails);
 		enrollmentRepository.save(enrollmentDetails);
-		return new ResponseEntity<String>("Enrollment Details added successfully!",new HttpHeaders(),HttpStatus.OK);
+		return "Enrollment Details added successfully!";
 	}
 
 }

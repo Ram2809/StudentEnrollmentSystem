@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 @Entity
 @Table(name="StudentAssign")
 public class StudentAssignEntity implements Serializable{
