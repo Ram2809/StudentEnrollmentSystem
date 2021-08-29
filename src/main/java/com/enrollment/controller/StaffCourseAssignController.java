@@ -45,7 +45,12 @@ public class StaffCourseAssignController {
 		List<StaffCourseAssignEntity>staffDetails=staffCourseAssignServiceImpl.getStaffDetailsByCourseId(courseId);
 		return new ResponseEntity<List<StaffCourseAssignEntity>>(staffDetails,new HttpHeaders(),HttpStatus.OK);
 	}
-	
+	@GetMapping("/addCourse/{courseId}/getStaffByCourse")
+	public ResponseEntity<List<Long>> getStaffDetailsByCourseCode(@PathVariable("courseId") String courseId) throws DepartmentNotFoundException, CourseCodeNotFoundException
+	{
+		List<Long>staffDetails=staffCourseAssignServiceImpl.getStaffDetailsByCourseCode(courseId);
+		return new ResponseEntity<List<Long>>(staffDetails,new HttpHeaders(),HttpStatus.OK);
+	}
 	
 	@PutMapping("/addStaffAssign/{newId}/updateCourse/{courseId}")
 	public ResponseEntity<String> updateCourseDetails(@PathVariable("newId") Long newId,@PathVariable("courseId") String courseId,@RequestBody StaffCourseAssignEntity staffCourseDetails) throws StaffIdNotFoundException

@@ -26,7 +26,7 @@ import lombok.ToString;
 public class EnrollmentEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long Autoid;
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="rollNo",nullable=false)
 	@JsonIgnore
@@ -36,7 +36,7 @@ public class EnrollmentEntity implements Serializable{
 	@JsonIgnore
 	private CourseEntity course;
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="staffId",nullable=false)
+	@JoinColumn(name="id",nullable=false)
 	@JsonIgnore
 	private StaffAssignEntity staff;
 }

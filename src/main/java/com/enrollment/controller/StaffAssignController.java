@@ -71,6 +71,12 @@ public class StaffAssignController {
 				return new ResponseEntity<String>("Staff is deleted successfully", new HttpHeaders(), HttpStatus.OK);
 
 		}
+	 @GetMapping("/getStaffDetails/{id}")
+	 public StaffAssignEntity getParticularStaffDetails(@PathVariable("id") Long id) throws StaffIdNotFoundException
+	 {
+		StaffAssignEntity staffAssignList=staffAssignServiceImpl.getParticularStaffDetails(id);
+		return staffAssignList;
+	 }
 	 
 	 
 //	 @PutMapping("/students/{studentId}/assignments/{assignmentId}")

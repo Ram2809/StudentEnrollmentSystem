@@ -1,5 +1,7 @@
 package com.enrollment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.enrollment.entity.CourseEntity;
 import com.enrollment.entity.EnrollmentEntity;
+import com.enrollment.entity.EnrollmentModel;
 import com.enrollment.entity.StaffAssignEntity;
 import com.enrollment.entity.StudentAssignEntity;
 import com.enrollment.exception.CourseCodeNotFoundException;
@@ -55,6 +58,12 @@ public class EnrollmentServiceImpl implements EnrollmentService{
 		enrollmentDetails.setCourse(courseDetails);
 		enrollmentRepository.save(enrollmentDetails);
 		return "Enrollment Details added successfully!";
+	}
+	@Override
+	public List<EnrollmentModel> getEnrollmentDetailsByRollNo(Long rollNo, Long semId, Long deptId) {
+		// TODO Auto-generated method stub
+		List<EnrollmentModel> enrollmentDetails=enrollmentRepository.findByRollNo(rollNo,semId,deptId);
+		return enrollmentDetails;
 	}
 
 }

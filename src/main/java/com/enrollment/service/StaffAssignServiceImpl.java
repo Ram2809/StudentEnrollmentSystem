@@ -73,6 +73,12 @@ public class StaffAssignServiceImpl implements StaffAssignService{
 				}).orElseThrow(()->new DepartmentNotFoundException("Staff Not Found,Enter the valid ID!"));
 	
 	}
+
+	@Override
+	public StaffAssignEntity getParticularStaffDetails(Long id) throws StaffIdNotFoundException {
+		// TODO Auto-generated method stub
+		return staffAssignRepository.findById(id).get();
+	}
 	}
 
 

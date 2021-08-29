@@ -88,6 +88,17 @@ CourseRepository courseRepository;
 		 
 	}
 
+	@Override
+	public List<Long> getStaffDetailsByCourseCode(String courseCode) throws CourseCodeNotFoundException {
+		// TODO Auto-generated method stub
+		if(!courseRepository.existsById(courseCode))
+		{
+			throw new CourseCodeNotFoundException("Course Code Not Found!,Enter the valid id");
+		}
+		List<Long> staffDetails=staffCourseAssignRepository.getByCourseId(courseCode);
+		return staffDetails;
+	}
+
 	
 	
 }

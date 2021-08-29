@@ -18,6 +18,6 @@ public interface StaffAssignService {
 	ResponseEntity<String> updateStaffAssign(long deptId,long id,StaffAssignEntity staffAssign) throws DepartmentNotFoundException, StaffIdNotFoundException;
 	
 	ResponseEntity<String> deleteStaffAssign(long deptId,long id,StaffAssignEntity staffAssign) throws DepartmentNotFoundException, StaffIdNotFoundException;
-	
+	StaffAssignEntity getParticularStaffDetails(Long id) throws StaffIdNotFoundException;
 	
 }
