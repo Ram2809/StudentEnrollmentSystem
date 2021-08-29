@@ -1,5 +1,7 @@
 package com.enrollment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.enrollment.entity.StaffEntity;
 import com.enrollment.entity.StaffLoginEntity;
+import com.enrollment.exception.DepartmentNotFoundException;
 import com.enrollment.exception.StaffIdNotFoundException;
 import com.enrollment.repository.StaffLoginRepository;
 import com.enrollment.repository.StaffRepository;
@@ -37,18 +40,25 @@ public class StaffLoginServiceImpl implements StaffLoginService{
 	
 
 	@Override
-	public ResponseEntity<String> updateLoginCredentials(Long id, Long userId,StaffLoginEntity staffLogin)
+	public ResponseEntity<String> updateLoginCredentials(Long loginId,String password,StaffLoginEntity staffLogin)
 			throws StaffIdNotFoundException {
 		
-		if(!staffRepository.existsById(id))
+		if(!staffRepository.existsById(loginId))
 				throw new StaffIdNotFoundException("Staff id is not found");
-		return staffLoginRepository.findById(userId)
-				.map(staff->{
-                  
-                    staff.setPassword(staffLogin.getPassword());
-                    staffLoginRepository.save(staff);
-                    return new ResponseEntity<String>("Staff Login Details updated successfully!", new HttpHeaders(), HttpStatus.OK);
-                }).orElseThrow(()->new StaffIdNotFoundException("user Id Not Found!"));
+		
+		 staffLoginRepository.updateByLoginId(loginId,password);
+		return new ResponseEntity<String>("staffLoginDetails Updated  Successfully!",new HttpHeaders(),HttpStatus.OK);
+		
+		
+		
+	}
+
+	@Override
+	public List<StaffLoginEntity> getLoginDetails(Long loginId) throws StaffIdNotFoundException {
+		
+		List<StaffLoginEntity> staffLoginDetails=(List<StaffLoginEntity>) staffLoginRepository.findByLoginId(loginId);
+		 return staffLoginDetails;
+			
 	}
 
 	

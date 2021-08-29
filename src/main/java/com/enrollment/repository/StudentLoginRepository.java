@@ -10,19 +10,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.enrollment.entity.StaffCourseAssignEntity;
-import com.enrollment.entity.StaffEntity;
 import com.enrollment.entity.StaffLoginEntity;
+import com.enrollment.entity.StudentLoginEntity;
 
 @Repository
 @Transactional
-public interface StaffLoginRepository extends JpaRepository<StaffLoginEntity, Long>{
+public interface StudentLoginRepository extends JpaRepository<StudentLoginEntity,Long>{
 	@Modifying
-	@Query("SELECT s FROM StaffLoginEntity s WHERE s.loginId=:loginId")
-	List<StaffLoginEntity> findByLoginId(@RequestParam("loginId") long loginId);
+	@Query("UPDATE StudentLoginEntity s SET s.password=:password where s.userName=:userName")
+	void updateByLoginId( @Param("userName")Long userName,@Param("password") String password);
 	
-	@Modifying
-	@Query("UPDATE StaffLoginEntity s SET s.password=:password where s.loginId=:loginId")
-	void updateByLoginId( @Param("loginId")Long loginId,@Param("password") String password);
-
+    @Modifying
+    @Query("SELECT s FROM StudentLoginEntity s WHERE s.userName=:userName")
+    List<StudentLoginEntity> findByLoginId(@RequestParam("userName") long userName);
 }

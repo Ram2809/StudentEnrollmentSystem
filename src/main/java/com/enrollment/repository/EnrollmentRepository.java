@@ -11,7 +11,7 @@ import com.enrollment.entity.EnrollmentEntity;
 import com.enrollment.entity.EnrollmentModel;
 @Repository
 public interface EnrollmentRepository extends JpaRepository<EnrollmentEntity,Long>{
-	@Query("SELECT new com.enrollment.entity.EnrollmentModel(e.student.rollNo,e.course.courseCode,e.course.courseName,e.staff.id,e.staff.name) FROM EnrollmentEntity e WHERE e.student.rollNo=:rollNo AND e.course.semester.id=:semId AND e.course.department.deptId=:deptId")
+	@Query("SELECT new com.enrollment.entity.EnrollmentModel(e.student.rollNo,e.student.name,e.course.courseCode,e.course.courseName,e.staff.id,e.staff.name) FROM EnrollmentEntity e WHERE e.student.rollNo=:rollNo AND e.course.semester.id=:semId AND e.course.department.deptId=:deptId")
 	List<EnrollmentModel> findByRollNo(@Param("rollNo") Long rollNo,@Param("semId") Long semId,@Param("deptId") Long deptId);
 
 }

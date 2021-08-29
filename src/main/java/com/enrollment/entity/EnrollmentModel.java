@@ -7,17 +7,21 @@ import lombok.Setter;
 @Setter
 public class EnrollmentModel {
 	private Long rollNo;
+	private String studentName;
 	private String courseCode;
 	private String courseName;
 	private Long id;
 	private String staffName;
 
-	public EnrollmentModel(Long rollNo, String courseCode, String courseName, Long id, String staffName) {
+	public EnrollmentModel(Long rollNo, String studentName, String courseCode, String courseName, Long id,
+			String staffName) {
 		super();
 		this.rollNo = rollNo;
+		this.studentName = studentName;
 		this.courseCode = courseCode;
 		this.courseName = courseName;
 		this.id = id;
 		this.staffName = staffName;
 	}
+
 }

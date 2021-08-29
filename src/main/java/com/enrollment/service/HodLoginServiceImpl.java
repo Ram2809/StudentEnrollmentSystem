@@ -28,21 +28,22 @@ public class HodLoginServiceImpl implements HodLoginService{
 					return new ResponseEntity<String>("HOD Login Details added successfully!", new HttpHeaders(), HttpStatus.OK);
 				}).orElseThrow(()->new HodIdNotFoundException("Hod Not Found!"));
 	}
-	@Override
-	public ResponseEntity<String> updateHodLoginDetails(Long hodId, Long loginId, HodLoginEntity hodLoginDetails) throws HodIdNotFoundException, LoginIdNotFoundException {
-		// TODO Auto-generated method stub
-		if(!hodRepository.existsById(hodId))
-		{
-			throw new HodIdNotFoundException("HOD Id Not Found!");
-		}
-		return hodLoginRepository.findById(loginId)
-				.map(loginDetails->{
-					loginDetails.setUserId(hodLoginDetails.getUserId());
-					loginDetails.setPassword(hodLoginDetails.getPassword());
-					hodLoginRepository.save(loginDetails);
-					return new ResponseEntity<String>("HOD Login Details updated successfully!", new HttpHeaders(), HttpStatus.OK);
-				}).orElseThrow(()->new LoginIdNotFoundException("Login Id Not Found!"));
-	}
+//	@Override
+//	public ResponseEntity<String> updateHodLoginDetails(Long hodId, Long loginId, HodLoginEntity hodLoginDetails) throws HodIdNotFoundException, LoginIdNotFoundException {
+//		// TODO Auto-generated method stub
+//		if(!hodRepository.existsById(hodId))
+//		{
+//			throw new HodIdNotFoundException("HOD Id Not Found!");
+//		}
+//		return hodLoginRepository.findById(loginId)
+//				.map(loginDetails->{
+//					loginDetails.setUserId(hodLoginDetails.getUserId());
+//					loginDetails.setPassword(hodLoginDetails.getPassword());
+//					hodLoginRepository.save(loginDetails);
+//					return new ResponseEntity<String>("HOD Login Details updated successfully!", new HttpHeaders(), HttpStatus.OK);
+//				}).orElseThrow(()->new LoginIdNotFoundException("Login Id Not Found!"));
+//	}
+	
 	@Override
 	public ResponseEntity<HodLoginEntity> getHodLoginDetails(Long hodId) throws HodIdNotFoundException {
 		// TODO Auto-generated method stub
@@ -53,5 +54,17 @@ public class HodLoginServiceImpl implements HodLoginService{
 		HodLoginEntity hodLoginDetails=hodLoginRepository.getByHodId(hodId);
 		return new ResponseEntity<HodLoginEntity>(hodLoginDetails,new HttpHeaders(),HttpStatus.OK);
 	}
+@Override
+public ResponseEntity<String> updateHodLoginDetails(Long loginId, String password, HodLoginEntity hodLoginDetails)
+		throws HodIdNotFoundException, LoginIdNotFoundException {
+	// TODO Auto-generated method stub
+	if(!hodRepository.existsById(loginId))
+	{
+		throw new HodIdNotFoundException("Hod ID Not Found!");
+	}
+	hodLoginRepository.updateById(loginId,password);
+	return null;
+}
+	
 	
 }
