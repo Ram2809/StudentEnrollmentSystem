@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import com.enrollment.service.StaffServiceImpl;
 
 @RestController
 @RequestMapping("/staffs")
+@CrossOrigin("http://localhost:4200")
 public class StaffController {
 
 	@Autowired
@@ -69,4 +71,10 @@ public class StaffController {
 			return new ResponseEntity<String>("staff deleted successfully", new HttpHeaders(), HttpStatus.OK);
 		}
 	}
+	@GetMapping("/addStaffAssign/{newId}/getStaff")
+    private ResponseEntity<StaffEntity>getStaffById(@PathVariable("newId") long newId)
+    {
+        StaffEntity staff=staffService.getStaffById(newId);
+        return new ResponseEntity<StaffEntity>(staff, new HttpHeaders(), HttpStatus.OK);
+    }
 }

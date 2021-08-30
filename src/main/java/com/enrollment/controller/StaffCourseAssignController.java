@@ -63,7 +63,13 @@ public class StaffCourseAssignController {
 	{
 		return staffCourseAssignServiceImpl.deleteStaffCourse(newId,courseId);
 	}
-
+	@GetMapping("/addStaffAssign/{newId}/getCourse")
+    public ResponseEntity<List<String>> getCourseDetailsByStaffId(@PathVariable("newId") Long newId) throws StaffIdNotFoundException
+    {
+        List<String>staffDetails=staffCourseAssignServiceImpl.getCourseDetailsByStaffId(newId);
+        return new ResponseEntity<List<String>>(staffDetails,new HttpHeaders(),HttpStatus.OK);
+    }
+	
 }
 
 

@@ -49,6 +49,7 @@ public class StaffServiceImpl implements StaffService {
 		
 		return staffRepository.findAll();
 	}
+	
 
 	@Override
 	public ResponseEntity<String> updateStaff(long id, StaffEntity staffEntity) throws StaffIdNotFoundException {

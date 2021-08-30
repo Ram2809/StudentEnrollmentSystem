@@ -98,6 +98,16 @@ CourseRepository courseRepository;
 		List<Long> staffDetails=staffCourseAssignRepository.getByCourseId(courseCode);
 		return staffDetails;
 	}
+	public List<String> getCourseDetailsByStaffId(Long newId)
+            throws StaffIdNotFoundException {
+        if(!staffAssignRepository.existsById(newId))
+        {
+            throw new StaffIdNotFoundException("StaffId Not Found!,Enter the valid id");
+        }
+        List<String> staffDetails=staffCourseAssignRepository.getCourseDetailsByStaffId(newId);
+        return staffDetails;
+   
+    }
 
 	
 	

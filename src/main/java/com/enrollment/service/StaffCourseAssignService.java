@@ -21,4 +21,5 @@ public interface StaffCourseAssignService {
 
 	ResponseEntity<String> deleteStaffCourse(Long newId,String courseId) throws StaffIdNotFoundException;
 	List<Long> getStaffDetailsByCourseCode(String courseCode) throws  CourseCodeNotFoundException;
+	List<String> getCourseDetailsByStaffId(Long newId) throws  StaffIdNotFoundException;
 }

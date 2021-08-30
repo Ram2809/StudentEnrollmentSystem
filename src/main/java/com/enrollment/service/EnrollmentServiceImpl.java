@@ -13,6 +13,7 @@ import com.enrollment.entity.EnrollmentEntity;
 import com.enrollment.entity.EnrollmentModel;
 import com.enrollment.entity.StaffAssignEntity;
 import com.enrollment.entity.StudentAssignEntity;
+import com.enrollment.entity.StudentModel;
 import com.enrollment.exception.CourseCodeNotFoundException;
 import com.enrollment.exception.RollNoNotFoundException;
 import com.enrollment.exception.StaffIdNotFoundException;
@@ -65,5 +66,18 @@ public class EnrollmentServiceImpl implements EnrollmentService{
 		List<EnrollmentModel> enrollmentDetails=enrollmentRepository.findByRollNo(rollNo,semId,deptId);
 		return enrollmentDetails;
 	}
+	public List<StudentModel>getStudents( String code, Long staffId) throws StaffIdNotFoundException, CourseCodeNotFoundException, StaffIdNotFoundException {
+	       
+        if(!courseRepository.existsById(code))
+        {
+            throw new CourseCodeNotFoundException("Course Not Found!Enter the valid ID!");
+        }
+        if(!staffRepository.existsById(staffId))
+        {
+            throw new StaffIdNotFoundException("Staff Not Found!Enter the valid ID!");
+        }
+         List<StudentModel>students=enrollmentRepository.getStudents(code,staffId);
+         return students;
+    }
 
 }

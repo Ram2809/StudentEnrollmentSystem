@@ -31,7 +31,8 @@ public interface StaffCourseAssignRepository extends JpaRepository<StaffCourseAs
 	@Query("SELECT c.staffId.id FROM StaffCourseAssignEntity c where c.courseId.courseCode=:courseCode")
 	List<Long> getByCourseId(@Param("courseCode") String courseCode);
 	
-	
+	@Query("SELECT c.courseId.courseCode FROM StaffCourseAssignEntity c WHERE  c.staffId.id=:newId ")
+    List<String> getCourseDetailsByStaffId(@Param("newId") Long newId);
 	
 //	public static final String FIND_PROJECTS = "SELECT sc.auto_id,s.id,c.course_code FROM staff_course_assign sc join staff_assign s on sc.id=s.id join course c on sc.course_code=c.course_code WHERE c.course_code=?1";
 //

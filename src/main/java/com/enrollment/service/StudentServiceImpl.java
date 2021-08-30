@@ -50,8 +50,8 @@ public class StudentServiceImpl implements StudentService{
 	}
 	*/
 	@Override
-	public ResponseEntity<String> updateStudentDetails(Long id,StudentEntity studentEntity) throws RollNoNotFoundException {
-		return studentDAO.findById(id)
+	public ResponseEntity<String> updateStudentDetails(Long personalId,StudentEntity studentEntity) throws RollNoNotFoundException {
+		return studentDAO.findById(personalId)
 		.map(student->{
 		student.setFirstName(studentEntity.getFirstName());
 		student.setLastName(studentEntity.getLastName());
@@ -62,14 +62,14 @@ public class StudentServiceImpl implements StudentService{
 		student.setAddress(studentEntity.getAddress());
 		studentDAO.save(student);
 	return new ResponseEntity<String>("Student Details updated successfully!",new HttpHeaders(),HttpStatus.OK);
-	}).orElseThrow(()->new RollNoNotFoundException("Student not found with the rollNo"+" "+id));
+	}).orElseThrow(()->new RollNoNotFoundException("Student not found with the rollNo"+" "+personalId));
 	}
 	
 	@Override
-	public StudentEntity deleteStudentDetails(Long id) {
-		StudentEntity studentEntity=studentDAO.findById(id).get();
+	public StudentEntity deleteStudentDetails(Long personalId) {
+		StudentEntity studentEntity=studentDAO.findById(personalId).get();
 		if(	studentEntity !=null)
-			studentDAO.deleteById(id);
+			studentDAO.deleteById(personalId);
 		return studentEntity;  
 	}
 
